@@ -63,6 +63,12 @@ int main (void){
         }
         printf("\n");
     }
+    for(linha=0;linha<linhas;linha++){
+        free(matriz[linha]);
+        free(matrizT[linha]);
+    }
+    free(matriz);
+    free(matrizT);
 
 
     return 0;
