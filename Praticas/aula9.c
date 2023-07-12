@@ -30,12 +30,13 @@ Funcionario * cadastra_funcionario(void){
 }
 
 void imprime(Funcionario *funcionario){
-    printf("Dados Informados:\nNome:%s \t Salario: %f")
+    printf("Dados Informados:\nNome:%s \t Salario: %f \t Identificador: %d \t Cargo: %s", funcionario->nome, funcionario->salario, funcionario->identificador, funcionario->cargo);
 }
 
 int main(void){
 
     Funcionario * funcionario = cadastra_funcionario();
+    imprime(funcionario);
 
     return 0;
 }
