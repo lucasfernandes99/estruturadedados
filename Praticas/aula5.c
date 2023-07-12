@@ -26,5 +26,6 @@ int main(void){
 
     printf("Os dados informados:\n Nome: %s \t Idade: %d \t RG: %d \t Altura: %.2f", var_pessoa.nome, var_pessoa.idade, var_pessoa.RG, var_pessoa.altura);       
 
+    
     return 0;
 }
