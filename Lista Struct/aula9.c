@@ -8,35 +8,61 @@ typedef struct funcionario{
     char cargo[20];
 }Funcionario;
 
-Funcionario * cadastra_funcionario(void){
-    Funcionario * funcionario = (Funcionario *) malloc(sizeof(Funcionario));
-    if(funcionario==NULL){
-        printf("Sem memoria\n");
-        exit(1);
-    }
-    printf("Digite o nome: \n");
-    scanf(" %[^\n]",funcionario->nome);
+void cadastra_funcionario(Funcionario * func){
+    
+    printf("\nDigite o nome: \n");
+    scanf(" %[^\n]",func->nome);
 
     printf("Digite o salario: \n");
-    scanf("%f",&funcionario->salario);
+    scanf("%f",&func->salario);
 
     printf("Digite o identificador: \n");
-    scanf("%d",&funcionario->identificador);
+    scanf("%d",&func->identificador);
 
     printf("Digite o cargo: \n");
-    scanf(" %[^\n]",funcionario->cargo);
+    scanf(" %[^\n]",func->cargo);
 
-    return funcionario;
 }
 
-void imprime(Funcionario *funcionario){
-    printf("Dados Informados:\nNome:%s \t Salario: %f \t Identificador: %d \t Cargo: %s", funcionario->nome, funcionario->salario, funcionario->identificador, funcionario->cargo);
+void imprime(Funcionario *func){
+    printf("\nDados Informados:\nNome:%s \t Salario: R$ %.2f \t Identificador: %d \t Cargo: %s", func->nome, func->salario, func->identificador, func->cargo);
+}
+
+void alteraSalario(Funcionario *func, float valor) {
+    func->salario += valor;
+}
+
+void maiorMenorSalario(Funcionario *func, int tam) {
+    int i, maior = 0, menor = 0;
+    for (i = 0; i < tam; i++) {
+        if (func[i].salario > func[maior].salario) {
+            maior = i;
+        }
+        if (func[i].salario < func[menor].salario) {
+            menor = i;
+        }
+        
+    }
+    printf("\nCargo com maior salario: %s \t Salario: R$ %.2f\nCargo com menor salario: %s \t Salario: R$ %.2f", func[maior].cargo, func[maior].salario, func[menor].cargo, func[menor].salario);
 }
 
 int main(void){
 
-    Funcionario * funcionario = cadastra_funcionario();
-    imprime(funcionario);
+    int quant;
+    printf("Digite a quantidade de funcionarios: ");
+    scanf("%d", &quant);
+
+    Funcionario func[quant];
+    int i;
+    for (i = 0; i < quant; i++) {
+        cadastra_funcionario(&func[i]);
+    }
+    for (i = 0; i < quant; i++) {
+        imprime(&func[i]);
+    }
+    alteraSalario(&func[0], 1000);
+
+    maiorMenorSalario(func, quant);
 
     return 0;
 }
