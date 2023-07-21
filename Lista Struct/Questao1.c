@@ -28,9 +28,16 @@ void imprime(Funcionario *func){
     printf("\nDados Informados:\nNome:%s \t Salario: R$ %.2f \t Identificador: %d \t Cargo: %s", func->nome, func->salario, func->identificador, func->cargo);
 }
 
-void alteraSalario(Funcionario *func, float valor) {
-    func->salario += valor;
+void alteraSalario(Funcionario *func, int quant) {
+    int i;
+    
+    for(i = 0; i < quant; i++) {
+        printf("\nInfome o novo salario do funcionario %d: ", i+1);
+        scanf("%f", &func[i].salario);
+        printf("%f",func[i].salario);
+    }
 }
+
 
 void maiorMenorSalario(Funcionario *func, int tam) {
     int i, maior = 0, menor = 0;
@@ -60,7 +67,7 @@ int main(void){
     for (i = 0; i < quant; i++) {
         imprime(&func[i]);
     }
-    alteraSalario(&func[0], 1000);
+    alteraSalario(&func[i], quant);
 
     maiorMenorSalario(func, quant);
 

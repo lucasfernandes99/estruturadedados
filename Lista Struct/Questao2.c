@@ -31,22 +31,23 @@ void alteraPessoa(Pessoa *pess, int quant) {
     for(i = 0; i < quant; i++) {
         printf("\nInfome a nova idade da pessoa %d: ", i+1);
         scanf("%d", &pess[i].idade);
+        printf("%d",pess[i].idade);
     }
 }
 
-/*void maiorMenorSalario(pessionario *pess, int tam) {
+void maiorMenorIdade(Pessoa *pess, int tam) {
     int i, maior = 0, menor = 0;
     for (i = 0; i < tam; i++) {
-        if (pess[i].salario > pess[maior].salario) {
+        if (pess[i].idade > pess[maior].idade) {
             maior = i;
         }
-        if (pess[i].salario < pess[menor].salario) {
+        if (pess[i].idade < pess[menor].idade) {
             menor = i;
         }
         
     }
-    printf("\nCargo com maior salario: %s \t Salario: R$ %.2f\nCargo com menor salario: %s \t Salario: R$ %.2f", pess[maior].cargo, pess[maior].salario, pess[menor].cargo, pess[menor].salario);
-}*/
+    printf("\nPessoa mais velha: %s \nPessoa mais nova: %s ", pess[maior].nome, pess[menor].nome);
+}
 
 int main(void){
 
@@ -63,11 +64,8 @@ int main(void){
         imprime(&pess[i]);
     }
     alteraPessoa(&pess[i],quant);
-    for (i = 0; i < quant; i++) {
-        imprime(&pess[i]);
-    }
 
-    //maiorMenorSalario(pess, quant);
+    maiorMenorIdade(pess, quant);
 
     return 0;
 }
