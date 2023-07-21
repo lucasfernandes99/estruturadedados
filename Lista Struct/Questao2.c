@@ -25,19 +25,13 @@ void imprime(Pessoa *pess){
     printf("\nDados Informados:\nNome:%s \t Num Documento: %d \t Idade: %d", pess->nome, pess->doc, pess->idade);
 }
 
-void alteraPessoa(Pessoa *pess) {
-    char n;
+void alteraPessoa(Pessoa *pess, int quant) {
     int i;
     
-    do{
-        printf("\nDeseja alterar a idade s/n: ");
-        scanf("%s",&n);
-        printf("De qual pessoa deseja alterar? \n");
-        scanf("%d",&i-1);
-        printf("Digite a nova idade: ");
-        scanf("%d",&pess[i].idade);
-       
-    }while (n=='s');
+    for(i = 0; i < quant; i++) {
+        printf("\nInfome a nova idade da pessoa %d: ", i+1);
+        scanf("%d", &pess[i].idade);
+    }
 }
 
 /*void maiorMenorSalario(pessionario *pess, int tam) {
@@ -68,7 +62,7 @@ int main(void){
     for (i = 0; i < quant; i++) {
         imprime(&pess[i]);
     }
-    alteraPessoa(&pess[i]);
+    alteraPessoa(&pess[i],quant);
     for (i = 0; i < quant; i++) {
         imprime(&pess[i]);
     }
