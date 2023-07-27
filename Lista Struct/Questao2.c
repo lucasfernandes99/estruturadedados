@@ -1,71 +1,82 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct pessoa{
-    char nome[20];
-    int doc;
+    char nome[50];
     int idade;
-    
+    int cpf;
 }Pessoa;
 
-void cadastraPessoa(Pessoa * pess){
-    
-    printf("\nDigite o nome: \n");
-    scanf(" %[^\n]",pess->nome);
-
-    printf("Digite o numero do documento: \n");
-    scanf("%d",&pess->doc);
-
-    printf("Digite a idade: \n");
-    scanf("%d",&pess->idade);
-
-}
-
-void imprime(Pessoa *pess){
-    printf("\nDados Informados:\nNome:%s \t Num Documento: %d \t Idade: %d", pess->nome, pess->doc, pess->idade);
-}
-
-void alteraPessoa(Pessoa *pess, int quant) {
+void cadastraPessoa(Pessoa **pessoa, int quant){
     int i;
-    
-    for(i = 0; i < quant; i++) {
-        printf("\nInfome a nova idade da pessoa %d: ", i+1);
-        scanf("%d", &pess[i].idade);
-        printf("%d",pess[i].idade);
+    for(i=0;i<quant;i++){
+        printf("\nDigite o nome:\n");
+        scanf(" %[^\n]", pessoa[i]->nome);
+
+        printf("Digite a idade:\n");
+        scanf("%d", &pessoa[i]->idade);
+        
+        printf("Digite o documento:\n");
+        scanf("%d", &pessoa[i]->cpf);
     }
 }
 
-void maiorMenorIdade(Pessoa *pess, int tam) {
-    int i, maior = 0, menor = 0;
-    for (i = 0; i < tam; i++) {
-        if (pess[i].idade > pess[maior].idade) {
-            maior = i;
-        }
-        if (pess[i].idade < pess[menor].idade) {
-            menor = i;
-        }
-        
+void imprime(Pessoa **pessoa, int quant){
+    int i;
+    printf("\nDados Informados:\n");
+    for(i=0;i<quant;i++){
+        printf("\nPessoa %d\n", i+1);
+        printf("Nome:%s \t Idade: %d \t CPF: %d", pessoa[i]->nome, pessoa[i]->idade, pessoa[i]->cpf);
     }
-    printf("\nPessoa mais velha: %s \nPessoa mais nova: %s ", pess[maior].nome, pess[menor].nome);
+
 }
+
+void alteraIdade(Pessoa **pessoa,int quant){
+    int i;
+    printf("\n");
+    for(i=0;i<quant;i++){
+        printf("Digite a nova idade da pessoa %d: ", i+1);
+        scanf("%d", &pessoa[i]->idade);
+    }
+}
+
+void maiorMenorIdade(Pessoa **pessoa,int quant){
+    int i,maior = 0,menor = 0;
+    for (i=0;i<quant;i++){
+        if (pessoa[i]->idade > pessoa[maior]->idade){
+            maior=i;
+        }
+        if (pessoa[i]->idade < pessoa[menor]->idade){
+            menor=i;
+        }
+    }
+    printf("\nPessoa mais velha: %s \nPessoa mais nova: %s ", pessoa[maior]->nome, pessoa[menor]->nome);
+} 
 
 int main(void){
-
-    int quant;
+    int quant,i;
     printf("Digite a quantidade de pessoas: ");
-    scanf("%d", &quant);
-
-    Pessoa pess[quant];
-    int i;
-    for (i = 0; i < quant; i++) {
-        cadastraPessoa(&pess[i]);
+    scanf("%d",&quant);
+    Pessoa **pessoa=(Pessoa**) malloc(quant*sizeof(Pessoa*));
+    if(pessoa==NULL){
+        printf("Memoria nao alocada");
+        exit(1);
     }
-    for (i = 0; i < quant; i++) {
-        imprime(&pess[i]);
-    }
-    alteraPessoa(&pess[i],quant);
 
-    maiorMenorIdade(pess, quant);
+    for(i=0;i<quant;i++){
+        pessoa[i]=(Pessoa*) malloc(quant*sizeof(Pessoa));
+    }
+
+    cadastraPessoa(pessoa,quant);
+    imprime(pessoa,quant);
+    alteraIdade(pessoa,quant);
+    maiorMenorIdade(pessoa,quant);
+
+    for(i=0;i<quant;i++){
+        free(pessoa[i]);   
+    }
+
+    free(pessoa);
 
     return 0;
 }
