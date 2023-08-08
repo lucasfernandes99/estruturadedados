@@ -1,0 +1,4 @@
+Aluno 1
+Nome: teste
+Nota 1: 7.0 | Nota 2: 8.0 | Nota 3: 9.0
+

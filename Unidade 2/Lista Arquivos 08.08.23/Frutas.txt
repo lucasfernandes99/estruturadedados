@@ -1,0 +1,6 @@
+Frutas Cadastradas
+
+Nome: Manga , Valor: R$ 1.00
+Nome: Pera , Valor: R$ 2.00
+Nome: Banana3 , Valor: R$ 3.00
+Nome: maca , Valor: R$ 4.00
