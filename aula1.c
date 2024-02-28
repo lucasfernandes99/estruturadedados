@@ -6,6 +6,25 @@ typedef struct Aluno{
     float media;
 }aluno;
 
+int buscaBinaria(aluno v[], int n, int mat){
+    int i=0;
+    int f = n-1;
+    while (i <= f){
+        int meio = (i+f)/2;
+        if (v[meio].mat == mat){
+            return meio;
+        }
+        else if (v[meio].mat < mat){
+            i = meio + 1;
+        }
+        else {
+            f= meio - 1;
+        }
+    }
+    
+    return -1;
+}
+
 int buscaLinear(aluno v[], int n, int mat){
     int i;
     for (i = 0; i < n; i++){
@@ -33,7 +52,7 @@ int main(){
     printf("Informe a matricula:\n");
     int mat;
     scanf("%d", &mat);
-    int r = buscaLinear(v,n,mat);
+    int r = buscaBinaria(v,n,mat);
     if (r != -1){
         printf("Aluno encontrado: %s\n", v[r].nome);
     }
